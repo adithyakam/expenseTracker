@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import Login from "./components/Login/Login";
+import Homepage from "./Container/Homepage/Homepage";
 import "./App.css";
 
 class App extends Component {
   onChangeInputName = (e) => {
-    console.log(e.target.value);
     this.setState({ username: e.target.value });
   };
   onChangeInputPwd = (e) => {
-    console.log(e.target.value);
     this.setState({ pwd: e.target.value });
   };
   onSubmitForm = (e) => {
     e.preventDefault();
-    console.log("submitted");
+    this.setState({ route: "homepage" });
   };
 
   constructor() {
@@ -21,17 +20,22 @@ class App extends Component {
     this.state = {
       username: "",
       pwd: "",
+      route: "homepage",
     };
   }
 
   render() {
     return (
       <div className="App">
-        <Login
-          onChangeInputName={this.onChangeInputName}
-          onChangeInputPwd={this.onChangeInputPwd}
-          onSubmitForm={this.onSubmitForm}
-        />
+        {this.state.route !== "signin" ? (
+          <Homepage />
+        ) : (
+          <Login
+            onChangeInputName={this.onChangeInputName}
+            onChangeInputPwd={this.onChangeInputPwd}
+            onSubmitForm={this.onSubmitForm}
+          />
+        )}
       </div>
     );
   }
