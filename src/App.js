@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Login from "./components/Login/Login";
 import Homepage from "./Container/Homepage/Homepage";
 import "./App.css";
+import { Switch, Route, Link } from "react-router-dom";
 
 class App extends Component {
   onChangeInputName = (e) => {
@@ -20,14 +21,14 @@ class App extends Component {
     this.state = {
       username: "",
       pwd: "",
-      route: "homepage",
+      route: "login",
     };
   }
 
   render() {
     return (
       <div className="App">
-        {this.state.route !== "signin" ? (
+        {this.state.route !== "login" ? (
           <Homepage />
         ) : (
           <Login

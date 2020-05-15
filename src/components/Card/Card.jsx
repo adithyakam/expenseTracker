@@ -5,13 +5,12 @@ import ListElement from "./ListElement/ListElement";
 const Cards = ({ listAll }) => {
   return listAll.length > 0 ? (
     <div className="mx-auto">
-      <Card style={{ width: "18rem" }} className="container">
-        <Card.Header>Featured</Card.Header>
-        <ListGroup variant="flush">
+      <Card className="container">
+        <ul className="container">
           {listAll.map((ele, i) => (
             <ListElement ele={ele} key={i} />
           ))}
-        </ListGroup>
+        </ul>
       </Card>
     </div>
   ) : (
