@@ -18,23 +18,19 @@ const Input = ({
         >
           <div class="form-row align-items-center">
             <div class="col-auto">
-              <label class="sr-only" for="inlineFormInput">
-                Name
-              </label>
+              <label class="inputEmail4">Category</label>
               <input
                 type="text"
                 class="form-control mb-2"
                 id="inlineFormInput"
-                placeholder="Jane Doe"
+                placeholder="Category"
                 onChange={(event) => {
                   onInputChangeCategory(event);
                 }}
               />
             </div>
             <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">
-                Username
-              </label>
+              <label class="inputEmail4">Amount</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text">$</div>
@@ -43,19 +39,19 @@ const Input = ({
                   type="text"
                   class="form-control"
                   id="inlineFormInputGroup"
-                  placeholder="Username"
+                  placeholder="Amount"
                   onChange={(event) => {
                     onInputChangeAmt(event);
                   }}
                 />
               </div>
             </div>
-            <div class="form-row ">
-              <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-2">
-                  Submit
-                </button>
-              </div>
+            {/* <div class="form-row "> */}
+            <div class="col-auto align-middle">
+              <button type="submit" class="btn btn-primary mb-2">
+                Submit
+              </button>
+              {/* </div> */}
             </div>
           </div>
         </form>
