@@ -36,7 +36,7 @@ const Login = ({ onChangeInputName, onChangeInputPwd, onSubmitForm }) => {
               type="password"
               placeholder="Password"
               onChange={(event) => {
-                onChangeInputName(event);
+                onChangeInputPwd(event);
               }}
             />
           </Col>

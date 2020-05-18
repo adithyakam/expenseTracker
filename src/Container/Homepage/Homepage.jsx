@@ -6,26 +6,45 @@ import Nav from "../../components/Nav/Nav";
 import Overview from "../../components/Overview/Overview.jsx";
 
 import { Switch, Route, Link } from "react-router-dom";
+const link = "http://localhost:4000/";
 
 class Homepage extends Component {
   constructor(props) {
-    console.log(props);
-
-    super();
+    super(props);
     this.state = {
       category: "",
-      amt: 0,
-      listAll: [],
+      amount: 0,
+      listAll: this.props.payslip,
       totalIncome: 0,
+      username: this.props.username,
+      categorys: this.props.category,
+      payslip: this.props.payslip,
+      chart: false,
+      cat1: "",
+      cat2: "",
+      chartData: [],
     };
   }
   onsubmitForm = (e) => {
     e.preventDefault();
+
+    fetch(`${link}\Amount`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.username,
+        amount: this.state.amount,
+        category: this.state.category,
+        date: new Date(),
+      }),
+    }).then((res) => res.json());
+
     this.setState((prevState) => ({
       listAll: [
         ...prevState.listAll,
         {
-          amt: this.state.amt,
+          email: this.state.username,
+          amount: this.state.amount,
           category: this.state.category,
           date: new Date(),
         },
@@ -33,12 +52,45 @@ class Homepage extends Component {
     }));
   };
 
+  onsubmitFormOverview = (e) => {
+    e.preventDefault();
+
+    fetch(`${link}\overview`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        cat1: this.state.cat1,
+        cat2: this.state.cat2,
+        email: this.state.username,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // this.setState((prevState) => ({
+        //   chartData: [prevState.chartData, ...data],
+        // }));
+        // console.log(data);
+
+        this.setState(Object.assign(this.state.chartData, [...data]));
+        this.setState({ chart: true });
+      });
+    // console.log(this.state.chartData);
+  };
+
   onInputChangeCategory = (e) => {
     this.setState({ category: e.target.value });
   };
 
+  onInputChangeCat1 = (e) => {
+    this.setState({ cat1: e.target.value });
+  };
+
+  onInputChangeCat2 = (e) => {
+    this.setState({ cat2: e.target.value });
+  };
+
   onInputChangeAmt = (e) => {
-    this.setState({ amt: e.target.value });
+    this.setState({ amount: e.target.value });
   };
 
   onRemoveCard = (date) => {
@@ -74,18 +126,23 @@ class Homepage extends Component {
             <Cards
               listAll={this.state.listAll}
               onRemoveCard={this.onRemoveCard}
+              payslip={this.state.payslip}
             />
           )}
         />
-        <Route exact path="/overview" render={Overview} />
-
-        {/* 
-        <Input
-          onsubmitForm={this.onsubmitForm}
-          onInputChangeAmt={this.onInputChangeAmt}
-          onInputChangeCategory={this.onInputChangeCategory}
+        <Route
+          exact
+          path="/overview"
+          render={() => (
+            <Overview
+              onsubmitFormOverview={this.onsubmitFormOverview}
+              onInputChangeCat1={this.onInputChangeCat1}
+              onInputChangeCat2={this.onInputChangeCat2}
+              categorys={this.state.categorys}
+              chart={this.state.chart}
+            />
+          )}
         />
-        <Cards listAll={this.state.listAll} /> */}
       </div>
     );
   }

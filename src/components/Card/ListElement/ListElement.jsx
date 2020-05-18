@@ -17,7 +17,7 @@ const ListElement = ({ ele, onRemoveCard }) => {
           </small>
         </div>
         <div>
-          <spam class="px-5">{ele.amt}</spam>
+          <spam class="px-5">{ele.amount}</spam>
 
           <FontAwesomeIcon
             icon={faTrashAlt}
