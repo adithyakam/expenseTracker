@@ -1,23 +1,26 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import Chart from "./Chart";
 
 const Overview = ({
   onsubmitFormOverview,
   onInputChangeCat1,
   onInputChangeCat2,
-  categorys,
+  chartData,
   chart,
+  categorys,
+  xData,
+  xLabels,
 }) => {
   return (
     <div className="container">
-      return <h1>Overbiew</h1>;
+      <h1>Overbiew</h1>
       <form
         class="form-inline container w-75"
         onSubmit={(event) => {
           onsubmitFormOverview(event);
         }}
       >
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">
+        <label class="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
           Monthor category
         </label>
         <select
@@ -32,7 +35,7 @@ const Overview = ({
           <option value="Category">Category</option>
         </select>
 
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref2">
+        <label class="my-1 mr-2" htmlFor="inlineFormCustomSelectPref2">
           option 2
         </label>
         <select
@@ -42,7 +45,7 @@ const Overview = ({
             onInputChangeCat2(event);
           }}
         >
-          <option selected>Choose...</option>
+          <option selected></option>
           {categorys.map((ans) => {
             return <option value={ans}>{ans}</option>;
           })}
@@ -52,18 +55,9 @@ const Overview = ({
           Submit
         </button>
       </form>
-      {/* {chart ? (
-        <div>
-          <Bar
-            data={(1, 2, 3)}
-            width={100}
-            height={50}
-            options={{ maintainAspectRatio: false }}
-          />
-        </div>
-      ) : (
-        <div></div>
-      )} */}
+      <div>
+        <Chart chart={chart} xData={xData} xLabels={xLabels} />
+      </div>
     </div>
   );
 };

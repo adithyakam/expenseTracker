@@ -23,6 +23,8 @@ class Homepage extends Component {
       cat1: "",
       cat2: "",
       chartData: [],
+      xData: [],
+      xLabels: [],
     };
   }
   onsubmitForm = (e) => {
@@ -69,12 +71,24 @@ class Homepage extends Component {
         // this.setState((prevState) => ({
         //   chartData: [prevState.chartData, ...data],
         // }));
-        // console.log(data);
-
         this.setState(Object.assign(this.state.chartData, [...data]));
-        this.setState({ chart: true });
+        // console.log(this.state.chartData);
+        var xVarData = [];
+        var xVarLabels = [];
+
+        data.forEach((ele) => {
+          xVarLabels.push(ele.date_part);
+          xVarData.push(ele.sum);
+        });
+
+        this.setState(Object.assign(this.state.xData, [...xVarData]));
+        this.setState(Object.assign(this.state.xLabels, [...xVarLabels]));
+        this.setState({ chart: true }, () => {
+          "trueed";
+        });
+
+        // console.log(this.state.chart);
       });
-    // console.log(this.state.chartData);
   };
 
   onInputChangeCategory = (e) => {
@@ -98,7 +112,7 @@ class Homepage extends Component {
 
     this.state.listAll.map((ele) => {
       if (ele.date === date) {
-        console.log(ele.category);
+        // console.log(ele.category);
       }
     });
   };
@@ -138,8 +152,11 @@ class Homepage extends Component {
               onsubmitFormOverview={this.onsubmitFormOverview}
               onInputChangeCat1={this.onInputChangeCat1}
               onInputChangeCat2={this.onInputChangeCat2}
-              categorys={this.state.categorys}
+              chartData={this.state.chartData}
               chart={this.state.chart}
+              categorys={this.state.categorys}
+              xData={this.state.xData}
+              xLabels={this.state.xLabels}
             />
           )}
         />
