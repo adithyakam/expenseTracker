@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Form, Button } from "bootstrap/dist/css/bootstrap.min.css";
 import Input from "../../components/Input/Input";
 import Cards from "../../components/Card/Card";
 import Nav from "../../components/Nav/Nav";
@@ -25,6 +24,7 @@ class Homepage extends Component {
       chartData: [],
       xData: [],
       xLabels: [],
+      data: {},
     };
   }
   onsubmitForm = (e) => {
@@ -55,6 +55,18 @@ class Homepage extends Component {
   };
 
   onsubmitFormOverview = (e) => {
+    console.log("submitted");
+
+    var xVarData = [];
+    var xVarLabels = [];
+
+    // this.setState({ xData: [] }, () => {
+    //   console.log("SD");
+    // });
+    // this.setState({ xLabels: [] }, () => {
+    //   console.log("SD");
+    // });
+
     e.preventDefault();
 
     fetch(`${link}\overview`, {
@@ -68,26 +80,53 @@ class Homepage extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        // this.setState((prevState) => ({
-        //   chartData: [prevState.chartData, ...data],
-        // }));
-        this.setState(Object.assign(this.state.chartData, [...data]));
-        // console.log(this.state.chartData);
-        var xVarData = [];
-        var xVarLabels = [];
-
         data.forEach((ele) => {
-          xVarLabels.push(ele.date_part);
+          if (this.state.cat1 == "Category" && this.state.cat2 == "") {
+            console.log("in");
+
+            xVarLabels.push(ele.category);
+          } else {
+            console.log("in2");
+
+            xVarLabels.push(ele.date_part);
+          }
+
           xVarData.push(ele.sum);
         });
 
-        this.setState(Object.assign(this.state.xData, [...xVarData]));
-        this.setState(Object.assign(this.state.xLabels, [...xVarLabels]));
+        console.log("before datasetState", this.state.xData, xVarData);
+        console.log("before chrt setState", this.state.chartData, data);
+
+        console.log("before labels setState", this.state.xLabels, xVarLabels);
+        this.setState({
+          chartData: data,
+          xData: xVarData,
+          xLabels: xVarLabels,
+          data: {
+            labels: xVarLabels,
+            datasets: [
+              {
+                label: "Amount",
+                data: xVarData,
+                fill: true, // Don't fill area under the line
+                borderColor: "green", // Line color
+              },
+            ],
+          },
+        });
+
+        this.setState(
+          {},
+          console.log(
+            "after setState",
+            this.state.xData,
+            this.state.xLabels,
+            this.state.chartData
+          )
+        );
         this.setState({ chart: true }, () => {
           "trueed";
         });
-
-        // console.log(this.state.chart);
       });
   };
 
@@ -157,6 +196,7 @@ class Homepage extends Component {
               categorys={this.state.categorys}
               xData={this.state.xData}
               xLabels={this.state.xLabels}
+              data={this.state.data}
             />
           )}
         />

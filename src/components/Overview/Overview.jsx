@@ -10,6 +10,7 @@ const Overview = ({
   categorys,
   xData,
   xLabels,
+  data,
 }) => {
   return (
     <div className="container">
@@ -56,7 +57,7 @@ const Overview = ({
         </button>
       </form>
       <div>
-        <Chart chart={chart} xData={xData} xLabels={xLabels} />
+        <Chart chart={chart} xData={xData} xLabels={xLabels} data={data} />
       </div>
     </div>
   );
