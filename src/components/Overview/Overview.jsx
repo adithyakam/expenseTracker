@@ -12,9 +12,31 @@ const Overview = ({
   xLabels,
   data,
 }) => {
+  const onSelectedChange = () => {
+    console.log(document.getElementById("exampleCheck1").checked, "dss");
+    console.log(
+      document.getElementById("inlineFormCustomSelectPref2").disabled,
+      "dss2"
+    );
+    if (document.getElementById("exampleCheck1").checked) {
+      document.getElementById("inlineFormCustomSelectPref2").disabled = false;
+    } else {
+      document.getElementById("inlineFormCustomSelectPref2").disabled = true;
+    }
+  };
+
+  const onSelectedChange1 = (e) => {
+    console.log(e.target.value, "dss");
+    if (e.target.value === "Category") {
+      document.getElementById("exampleCheck1").disabled = false;
+    } else {
+      document.getElementById("exampleCheck1").disabled = true;
+      document.getElementById("inlineFormCustomSelectPref2").disabled = true;
+    }
+  };
   return (
     <div className="container">
-      <h1>Overbiew</h1>
+      <h1>Overview</h1>
       <form
         class="form-inline container w-75"
         onSubmit={(event) => {
@@ -24,11 +46,24 @@ const Overview = ({
         <label class="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
           Monthor category
         </label>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="exampleCheck1"
+            onChange={() => onSelectedChange()}
+            disabled
+          />
+          <label class="form-check-label" for="exampleCheck1">
+            Check me out
+          </label>
+        </div>
         <select
           class="custom-select my-1 mr-sm-2"
-          id="inlineFormCustomSelectPref"
+          id="inlineFormCustomSelectPref "
           onChange={(event) => {
             onInputChangeCat1(event);
+            onSelectedChange1(event);
           }}
         >
           <option selected>Choose...</option>
@@ -40,11 +75,12 @@ const Overview = ({
           option 2
         </label>
         <select
-          class="custom-select my-1 mr-sm-2"
+          class="custom-select my-1 mr-sm-2 chkbox"
           id="inlineFormCustomSelectPref2"
           onChange={(event) => {
             onInputChangeCat2(event);
           }}
+          disabled
         >
           <option selected></option>
           {categorys.map((ans) => {

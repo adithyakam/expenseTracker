@@ -25,6 +25,7 @@ class Homepage extends Component {
       xData: [],
       xLabels: [],
       data: {},
+      tAmount: 0,
     };
   }
   onsubmitForm = (e) => {
@@ -52,6 +53,26 @@ class Homepage extends Component {
         },
       ],
     }));
+
+    fetch(`${link}\getAmount`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.username,
+        date: new Date().getMonth() + 1,
+      }),
+    })
+      .then((response) => response.json())
+      .then((amt) => {
+        let tamt = 0;
+        amt.forEach((ele) => {
+          tamt = tamt + Number(ele.amount);
+        });
+        this.setState({ tAmount: tamt }, () => {
+          console.log("dfs");
+        });
+        this.setState({});
+      });
   };
 
   onsubmitFormOverview = (e) => {
@@ -93,11 +114,6 @@ class Homepage extends Component {
 
           xVarData.push(ele.sum);
         });
-
-        console.log("before datasetState", this.state.xData, xVarData);
-        console.log("before chrt setState", this.state.chartData, data);
-
-        console.log("before labels setState", this.state.xLabels, xVarLabels);
         this.setState({
           chartData: data,
           xData: xVarData,
@@ -131,6 +147,8 @@ class Homepage extends Component {
   };
 
   onInputChangeCategory = (e) => {
+    this.setState({ tAmount: Number(this.props.tAmount) });
+
     this.setState({ category: e.target.value });
   };
 
@@ -157,6 +175,8 @@ class Homepage extends Component {
   };
 
   render() {
+    console.log(this.state.tAmount);
+
     return (
       <div>
         <Nav />
@@ -169,6 +189,11 @@ class Homepage extends Component {
               onsubmitForm={this.onsubmitForm}
               onInputChangeAmt={this.onInputChangeAmt}
               onInputChangeCategory={this.onInputChangeCategory}
+              tAmount={
+                this.state.tAmount == 0
+                  ? this.props.tAmount
+                  : this.state.tAmount
+              }
             />
           )}
         />

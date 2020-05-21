@@ -47,11 +47,20 @@ class App extends Component {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               email: this.state.username,
+              date: new Date().getMonth() + 1,
             }),
           })
             .then((response) => response.json())
             .then((amt) => {
+              let tamt = 0;
+              amt.forEach((ele) => {
+                tamt = tamt + Number(ele.amount);
+              });
+              this.setState({ tAmount: tamt });
+
               this.setState(Object.assign(this.state.payslip, [...amt]));
+
+              console.log(this.state.tAmount);
             });
 
           this.setState({ route: "homepage" });
@@ -67,6 +76,7 @@ class App extends Component {
       route: "login",
       category: [],
       payslip: [],
+      tAmount: 0,
     };
   }
 
@@ -78,6 +88,7 @@ class App extends Component {
             username={this.state.username}
             category={this.state.category}
             payslip={this.state.payslip}
+            tAmount={this.state.tAmount}
           />
         ) : (
           <Login

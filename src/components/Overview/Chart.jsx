@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 class Chart extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Chart extends Component {
   render() {
     return this.props.chart ? (
       <div>
-        <Line data={this.props.data} redraw={true} responsive={true} />
+        <Bar data={this.props.data} redraw={true} responsive={true} />
       </div>
     ) : (
       <h1>no data toshow</h1>
