@@ -68,7 +68,7 @@ class Homepage extends Component {
         amt.forEach((ele) => {
           tamt = tamt + Number(ele.amount);
         });
-        this.setState({ tAmount: tamt }, () => {
+        this.setState({ tAmount: tamt + Number(this.state.amount) }, () => {
           console.log("dfs");
         });
         this.setState({});
