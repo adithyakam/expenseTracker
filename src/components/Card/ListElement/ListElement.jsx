@@ -24,7 +24,7 @@ const ListElement = ({ ele, onRemoveCard }) => {
             size="1x"
             style={{ textShadow: "0 1px 0 rgba(0, 0, 0, 0.1)" }}
             onClick={() => {
-              onRemoveCard(ele.date);
+              onRemoveCard(ele.id, ele.amount);
             }}
           />
         </div>

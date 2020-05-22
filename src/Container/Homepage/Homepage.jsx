@@ -28,6 +28,7 @@ class Homepage extends Component {
       tAmount: 0,
     };
   }
+
   onsubmitForm = (e) => {
     e.preventDefault();
 
@@ -40,38 +41,20 @@ class Homepage extends Component {
         category: this.state.category,
         date: new Date(),
       }),
-    }).then((res) => res.json());
-
-    this.setState((prevState) => ({
-      listAll: [
-        ...prevState.listAll,
-        {
-          email: this.state.username,
-          amount: this.state.amount,
-          category: this.state.category,
-          date: new Date(),
-        },
-      ],
-    }));
-
-    fetch(`${link}\getAmount`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: this.state.username,
-        date: new Date().getMonth() + 1,
-      }),
     })
-      .then((response) => response.json())
-      .then((amt) => {
-        let tamt = 0;
-        amt.forEach((ele) => {
-          tamt = tamt + Number(ele.amount);
-        });
-        this.setState({ tAmount: tamt + Number(this.state.amount) }, () => {
-          console.log("dfs");
-        });
-        this.setState({});
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          this.setState(
+            {
+              listAll: data,
+              tAmount: Number(this.state.tAmount) + Number(this.state.amount),
+            },
+            () => {
+              console.log("dssssdsin");
+            }
+          );
+        }
       });
   };
 
@@ -80,14 +63,6 @@ class Homepage extends Component {
 
     var xVarData = [];
     var xVarLabels = [];
-
-    // this.setState({ xData: [] }, () => {
-    //   console.log("SD");
-    // });
-    // this.setState({ xLabels: [] }, () => {
-    //   console.log("SD");
-    // });
-
     e.preventDefault();
 
     fetch(`${link}\overview`, {
@@ -147,8 +122,6 @@ class Homepage extends Component {
   };
 
   onInputChangeCategory = (e) => {
-    this.setState({ tAmount: Number(this.props.tAmount) });
-
     this.setState({ category: e.target.value });
   };
 
@@ -164,15 +137,36 @@ class Homepage extends Component {
     this.setState({ amount: e.target.value });
   };
 
-  onRemoveCard = (date) => {
-    console.log("del");
+  onRemoveCard = (id, delAmt) => {
+    console.log("del", id, delAmt, this.state.tAmount);
 
-    this.state.listAll.map((ele) => {
-      if (ele.date === date) {
-        // console.log(ele.category);
-      }
-    });
+    fetch(`${link}\delete`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.username,
+        id: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((amt) => {
+        if (amt.length > 0) {
+          this.setState(
+            {
+              listAll: amt,
+              tAmount: Number(this.state.tAmount) - Number(delAmt),
+            },
+            () => {
+              console.log("dssssdsin");
+            }
+          );
+        }
+      });
   };
+
+  componentWillReceiveProps(props) {
+    this.setState({ tAmount: props.tAmount });
+  }
 
   render() {
     console.log(this.state.tAmount);
