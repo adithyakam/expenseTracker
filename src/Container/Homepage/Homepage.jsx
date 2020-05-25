@@ -150,10 +150,22 @@ class Homepage extends Component {
     })
       .then((response) => response.json())
       .then((amt) => {
+        console.log(amt, "length");
+
         if (amt.length > 0) {
           this.setState(
             {
               listAll: amt,
+              tAmount: Number(this.state.tAmount) - Number(delAmt),
+            },
+            () => {
+              console.log("dssssdsin");
+            }
+          );
+        } else {
+          this.setState(
+            {
+              listAll: [],
               tAmount: Number(this.state.tAmount) - Number(delAmt),
             },
             () => {

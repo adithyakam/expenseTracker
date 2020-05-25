@@ -36,30 +36,28 @@ const Overview = ({
   };
   return (
     <div className="container">
-      <h1>Overview</h1>
+      <div className="form-inline justify-content-around">
+        <h1>Overview</h1>
+        <h3
+          data-toggle="tooltip"
+          title="*To get the chart per month select month
+                                          *To get chart categorywise select only ctegory
+                                          *To get   category wise data /month select category and pick a category in dropdoen "
+        >
+          help?
+        </h3>
+      </div>
       <form
-        class="form-inline container w-75"
+        className="form container w-75 form-row"
         onSubmit={(event) => {
           onsubmitFormOverview(event);
         }}
       >
-        <label class="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
+        <label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
           Monthor category
         </label>
-        <div class="form-check">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="exampleCheck1"
-            onChange={() => onSelectedChange()}
-            disabled
-          />
-          <label class="form-check-label" for="exampleCheck1">
-            Check me out
-          </label>
-        </div>
         <select
-          class="custom-select my-1 mr-sm-2"
+          className="custom-select my-1 mr-sm-2 col-auto"
           id="inlineFormCustomSelectPref "
           onChange={(event) => {
             onInputChangeCat1(event);
@@ -71,11 +69,27 @@ const Overview = ({
           <option value="Category">Category</option>
         </select>
 
-        <label class="my-1 mr-2" htmlFor="inlineFormCustomSelectPref2">
-          option 2
+        <div className="form-check mx-5">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="exampleCheck1"
+            onChange={() => onSelectedChange()}
+            disabled
+          />
+          <label className="form-check-label" for="exampleCheck1">
+            Check me out to enter category
+          </label>
+        </div>
+        <br />
+        <label
+          className="my-1 mr-2 col-auto"
+          htmlFor="inlineFormCustomSelectPref2"
+        >
+          Category
         </label>
         <select
-          class="custom-select my-1 mr-sm-2 chkbox"
+          className="custom-select my-1 mr-sm-2 chkbox col-auto"
           id="inlineFormCustomSelectPref2"
           onChange={(event) => {
             onInputChangeCat2(event);
@@ -88,7 +102,7 @@ const Overview = ({
           })}
         </select>
 
-        <button type="submit" class="btn btn-primary my-1">
+        <button type="submit" className="btn btn-primary my-1">
           Submit
         </button>
       </form>
