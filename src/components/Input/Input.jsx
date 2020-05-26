@@ -60,19 +60,18 @@ const Input = ({
                   type="text"
                   class="form-control"
                   id="inlineFormInputGroup"
-                  placeholder="Amount"
+                  placeholder="positive numbers only"
+                  pattern="\d+"
                   onChange={(event) => {
                     onInputChangeAmt(event);
                   }}
                 />
               </div>
             </div>
-            {/* <div class="form-row "> */}
             <div class="col-auto align-middle mx-auto">
               <button type="submit" class="btn btn-primary mb-2">
                 Submit
               </button>
-              {/* </div> */}
             </div>
           </div>
         </form>

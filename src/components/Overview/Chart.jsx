@@ -12,7 +12,7 @@ class Chart extends Component {
         <Bar data={this.props.data} redraw={true} responsive={true} />
       </div>
     ) : (
-      <h1>no data toshow</h1>
+      <h3>no data toshow</h3>
     );
   }
 }

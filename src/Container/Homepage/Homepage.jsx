@@ -55,6 +55,30 @@ class Homepage extends Component {
             }
           );
         }
+
+        fetch(`${link}\items`, {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: this.state.username,
+          }),
+        })
+          .then((response) => response.json())
+          .then((user) => {
+            const nn = new Set();
+            for (let a of user) {
+              nn.add(a.category);
+            }
+            // this.setState(Object.assign(this.state.category, [...nn]));
+            this.setState(
+              {
+                categorys: [...nn],
+              },
+              () => {
+                console.log("dssssdsin");
+              }
+            );
+          });
       });
   };
 
@@ -163,16 +187,42 @@ class Homepage extends Component {
             }
           );
         } else {
+          console.log("222");
+
           this.setState(
             {
               listAll: [],
               tAmount: Number(this.state.tAmount) - Number(delAmt),
             },
             () => {
-              console.log("dssssdsin");
+              console.log("dssssdsin2");
             }
           );
         }
+
+        fetch(`${link}\items`, {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: this.state.username,
+          }),
+        })
+          .then((response) => response.json())
+          .then((user) => {
+            const nn = new Set();
+            for (let a of user) {
+              nn.add(a.category);
+            }
+            // this.setState(Object.assign(this.state.category, [...nn]));
+            this.setState(
+              {
+                categorys: [...nn],
+              },
+              () => {
+                console.log("dssssdsin");
+              }
+            );
+          });
       });
   };
 

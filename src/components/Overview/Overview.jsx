@@ -1,5 +1,6 @@
 import React from "react";
 import Chart from "./Chart";
+import "../../App.css";
 
 const Overview = ({
   onsubmitFormOverview,
@@ -40,9 +41,9 @@ const Overview = ({
         <h1>Overview</h1>
         <h3
           data-toggle="tooltip"
-          title="*To get the chart per month select month
-                                          *To get chart categorywise select only ctegory
-                                          *To get   category wise data /month select category and pick a category in dropdoen "
+          title="*To get the chart per month select month &#013;
+                *To get chart category-wise select category &#013;
+                *To get category wise data per month select category then chechbox and pick a category in dropdown "
         >
           help?
         </h3>

@@ -6,7 +6,7 @@ const Nav = () => {
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
       <a class="navbar-brand" href="#">
-        Expense Trccker
+        Expense Traccker
       </a>
       <button
         class="navbar-toggler"

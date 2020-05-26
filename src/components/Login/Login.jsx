@@ -7,16 +7,16 @@ const Login = ({ onChangeInputName, onChangeInputPwd, onSubmitForm }) => {
     <Container>
       <h1>Login</h1>
       <Form
-        className="Container"
+        className="Container m-2 p-2"
         onSubmit={(event) => {
           onSubmitForm(event);
         }}
       >
         <Form.Group as={Row} controlId="formHorizontalEmail">
-          <Form.Label column sm={2}>
+          <Form.Label column sm={4}>
             Email
           </Form.Label>
-          <Col sm={10}>
+          <Col sm={8}>
             <Form.Control
               type="email"
               placeholder="Email"
@@ -28,10 +28,10 @@ const Login = ({ onChangeInputName, onChangeInputPwd, onSubmitForm }) => {
         </Form.Group>
 
         <Form.Group as={Row} controlId="formHorizontalPassword">
-          <Form.Label column sm={2}>
+          <Form.Label column sm={4}>
             Password
           </Form.Label>
-          <Col sm={10}>
+          <Col sm={8}>
             <Form.Control
               type="password"
               placeholder="Password"
