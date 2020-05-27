@@ -3,7 +3,7 @@ import Register from "../../components/Register/Register";
 import Homepage from "../../Container/Homepage/Homepage";
 import Login from "../Login/LoginMainPage";
 // import Register from "./Register";
-const link = "http://localhost:4000/";
+const link = "https://warm-refuge-51345.herokuapp.com/";
 
 class RegisterMainPage extends Component {
   onChangeInputName = (e) => {

@@ -5,7 +5,7 @@ import Nav from "../../components/Nav/Nav";
 import Overview from "../../components/Overview/Overview.jsx";
 
 import { Switch, Route, Link } from "react-router-dom";
-const link = "http://localhost:4000/";
+const link = "https://warm-refuge-51345.herokuapp.com/";
 
 class Homepage extends Component {
   constructor(props) {
